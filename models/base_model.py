@@ -9,10 +9,18 @@ from datetime import datetime
 
 class BaseModel:
     """Creating a BaseModel Class"""
-    def __init__(self, id=str(uuid.uuid4()), created_at=datetime.today(), updated_at=datetime.today()):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.today()
-        self.updated_at = datetime.today()
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for k, v in kwargs.items():
+                if k in ['created_at', 'updated_at']:
+                    v = datetime.strptime(v, '%Y-%m-%dT%H:%M:%S.%f')
+                if k is not '__class__':
+                    setattr(self, k, v)
+
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
 
     def __str__(self):
         """a string method for this class"""
