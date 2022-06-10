@@ -1,15 +1,11 @@
 #!/usr/bin/python3
-'''
-    Implementation of the Review class
-'''
+"""Review class"""
 
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    '''
-        Implementation for the Review.
-    '''
+    """inherited from BaseModel"""
     place_id = ""
     user_id = ""
     text = ""
